@@ -1,7 +1,12 @@
 import React from "react";
+import Table from "./components/Table";
 
 function App() {
-  return <div>Hi</div>;
+  return (
+    <div>
+      <Table />
+    </div>
+  );
 }
 
 export default App;
