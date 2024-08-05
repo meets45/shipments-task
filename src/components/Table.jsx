@@ -306,12 +306,99 @@ const Table = () => {
     }
     setData(filteredData);
   };
+  const handleSalFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    const value = parseInt(filterValue, 10);
+    const start = parseInt(rangeStart, 10);
+    const end = parseInt(rangeEnd, 10);
+
+    switch (filterCondition) {
+      case "equals":
+        filteredData = filteredData.filter((row) => row.salary === value);
+        break;
+      case "lessThan":
+        filteredData = filteredData.filter((row) => row.salary < value);
+        break;
+      case "lessThanOrEqual":
+        filteredData = filteredData.filter((row) => row.salary <= value);
+        break;
+      case "greaterThan":
+        filteredData = filteredData.filter((row) => row.salary > value);
+        break;
+      case "greaterThanOrEqual":
+        filteredData = filteredData.filter((row) => row.salary >= value);
+        break;
+      case "range":
+        filteredData = filteredData.filter(
+          (row) => row.salary >= start && row.salary <= end
+        );
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter((row) => row.salary !== value);
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
+  const handleProjCFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    const value = parseInt(filterValue, 10);
+    const start = parseInt(rangeStart, 10);
+    const end = parseInt(rangeEnd, 10);
+
+    switch (filterCondition) {
+      case "equals":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted === value
+        );
+        break;
+      case "lessThan":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted < value
+        );
+        break;
+      case "lessThanOrEqual":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted <= value
+        );
+        break;
+      case "greaterThan":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted > value
+        );
+        break;
+      case "greaterThanOrEqual":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted >= value
+        );
+        break;
+      case "range":
+        filteredData = filteredData.filter(
+          (row) =>
+            row.projectsCompleted >= start && row.projectsCompleted <= end
+        );
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter(
+          (row) => row.projectsCompleted !== value
+        );
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
   const clearData = () => {
     setData(tpdata);
   };
   const HandleFiltr = () => {
     if (attribute === "age") handleAgeFilter();
     else if (attribute === "id") handleIDFilter();
+    else if (attribute === "salary") handleSalFilter();
+    else if (attribute === "projectsCompleted") handleProjCFilter();
   };
   const HandleOnchngFil = (e) => {
     setFilterCondition(e.target.value);
@@ -379,6 +466,7 @@ const Table = () => {
   };
   return (
     <div className="mt-5 flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold mb-5">Shipments Task #1 </h1>
       <div className="mb-4">
         <select
           className="border border-gray-300 p-2 mr-2"
