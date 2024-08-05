@@ -211,7 +211,6 @@ const Table = () => {
   //     //     setData(jsonData);
   //     //   });
   //   }, []);
-  const [sortOrder, setSortOrder] = useState("asc");
   const [tpdata, setTpdata] = useState("");
   const [filterCondition, setFilterCondition] = useState("");
   const [filterValue, setFilterValue] = useState("");
@@ -222,18 +221,7 @@ const Table = () => {
     const date = new Date(isoString);
     return date.toLocaleString();
   };
-  const handleSort = () => {
-    setTpdata(data);
-    const sortedData = [...data].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.age - b.age;
-      } else {
-        return b.age - a.age;
-      }
-    });
-    setData(sortedData);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-  };
+
   const handleIDFilter = () => {
     let filteredData = [...data];
     setTpdata(data);
@@ -391,14 +379,195 @@ const Table = () => {
     }
     setData(filteredData);
   };
+
+  const handleNameFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    switch (filterCondition) {
+      case "contains":
+        filteredData = filteredData.filter(
+          (row) => row.name && row.name.includes(filterValue)
+        );
+        break;
+      case "notContains":
+        filteredData = filteredData.filter(
+          (row) => !row.name || !row.name.includes(filterValue)
+        );
+        break;
+      case "equals":
+        filteredData = filteredData.filter((row) => row.name === filterValue);
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter((row) => row.name !== filterValue);
+        break;
+      case "startsWith":
+        filteredData = filteredData.filter(
+          (row) => row.name && row.name.startsWith(filterValue)
+        );
+        break;
+      case "endsWith":
+        filteredData = filteredData.filter(
+          (row) => row.name && row.name.endsWith(filterValue)
+        );
+        break;
+      case "isNull":
+        filteredData = filteredData.filter((row) => !row.name);
+        break;
+      case "isNotNull":
+        filteredData = filteredData.filter((row) => row.name);
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
+  const handleRoleFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    switch (filterCondition) {
+      case "contains":
+        filteredData = filteredData.filter(
+          (row) => row.role && row.role.includes(filterValue)
+        );
+        break;
+      case "notContains":
+        filteredData = filteredData.filter(
+          (row) => !row.role || !row.role.includes(filterValue)
+        );
+        break;
+      case "equals":
+        filteredData = filteredData.filter((row) => row.role === filterValue);
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter((row) => row.role !== filterValue);
+        break;
+      case "startsWith":
+        filteredData = filteredData.filter(
+          (row) => row.role && row.role.startsWith(filterValue)
+        );
+        break;
+      case "endsWith":
+        filteredData = filteredData.filter(
+          (row) => row.role && row.role.endsWith(filterValue)
+        );
+        break;
+      case "isNull":
+        filteredData = filteredData.filter((row) => !row.role);
+        break;
+      case "isNotNull":
+        filteredData = filteredData.filter((row) => row.role);
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
+  const handleDepartmentFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    switch (filterCondition) {
+      case "contains":
+        filteredData = filteredData.filter(
+          (row) => row.department && row.department.includes(filterValue)
+        );
+        break;
+      case "notContains":
+        filteredData = filteredData.filter(
+          (row) => !row.department || !row.department.includes(filterValue)
+        );
+        break;
+      case "equals":
+        filteredData = filteredData.filter(
+          (row) => row.department === filterValue
+        );
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter(
+          (row) => row.department !== filterValue
+        );
+        break;
+      case "startsWith":
+        filteredData = filteredData.filter(
+          (row) => row.department && row.department.startsWith(filterValue)
+        );
+        break;
+      case "endsWith":
+        filteredData = filteredData.filter(
+          (row) => row.department && row.department.endsWith(filterValue)
+        );
+        break;
+      case "isNull":
+        filteredData = filteredData.filter((row) => !row.department);
+        break;
+      case "isNotNull":
+        filteredData = filteredData.filter((row) => row.department);
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
+  const handleAccessFilter = () => {
+    let filteredData = [...data];
+    setTpdata(data);
+    switch (filterCondition) {
+      case "contains":
+        filteredData = filteredData.filter(
+          (row) => row.accessLevel && row.accessLevel.includes(filterValue)
+        );
+        break;
+      case "notContains":
+        filteredData = filteredData.filter(
+          (row) => !row.accessLevel || !row.accessLevel.includes(filterValue)
+        );
+        break;
+      case "equals":
+        filteredData = filteredData.filter(
+          (row) => row.accessLevel === filterValue
+        );
+        break;
+      case "notEqual":
+        filteredData = filteredData.filter(
+          (row) => row.accessLevel !== filterValue
+        );
+        break;
+      case "startsWith":
+        filteredData = filteredData.filter(
+          (row) => row.accessLevel && row.accessLevel.startsWith(filterValue)
+        );
+        break;
+      case "endsWith":
+        filteredData = filteredData.filter(
+          (row) => row.accessLevel && row.accessLevel.endsWith(filterValue)
+        );
+        break;
+      case "isNull":
+        filteredData = filteredData.filter((row) => !row.accessLevel);
+        break;
+      case "isNotNull":
+        filteredData = filteredData.filter((row) => row.accessLevel);
+        break;
+      default:
+        break;
+    }
+    setData(filteredData);
+  };
   const clearData = () => {
     setData(tpdata);
+  };
+  const handlefilterVALUE = (e) => {
+    setFilterValue(e.target.value);
+    if (filterValue === "" && tpdata !== "") setData(tpdata);
   };
   const HandleFiltr = () => {
     if (attribute === "age") handleAgeFilter();
     else if (attribute === "id") handleIDFilter();
     else if (attribute === "salary") handleSalFilter();
     else if (attribute === "projectsCompleted") handleProjCFilter();
+    else if (attribute === "name") handleNameFilter();
+    else if (attribute === "role") handleRoleFilter();
+    else if (attribute === "department") handleDepartmentFilter();
+    else if (attribute === "accessLevel") handleAccessFilter();
   };
   const HandleOnchngFil = (e) => {
     setFilterCondition(e.target.value);
@@ -488,10 +657,10 @@ const Table = () => {
         {handleAttr()}
         {filterCondition !== "range" ? (
           <input
-            type="number"
+            type="text"
             className="border border-gray-300 p-2 mr-2"
             placeholder="Value"
-            onChange={(e) => setFilterValue(e.target.value)}
+            onChange={(e) => handlefilterVALUE(e)}
           />
         ) : (
           <>
@@ -533,11 +702,8 @@ const Table = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                   Name
                 </th>
-                <th
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider"
-                  onClick={handleSort}
-                >
-                  Age {sortOrder === "desc" ? "△" : "▽"}
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                  Age
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                   Role
